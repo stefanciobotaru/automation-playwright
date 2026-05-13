@@ -41,7 +41,6 @@ npx playwright test -g "get first product price"
 ```
 tests/
   buticulroxanei.spec.ts   # Tests for buticulroxanei.ro
-  google-search.spec.ts    # Google Search example tests
   helpers.ts               # Reusable interaction helpers
 playwright.config.ts       # Playwright configuration
 ```
@@ -63,11 +62,6 @@ playwright.config.ts       # Playwright configuration
 - Search the product catalog by keyword
 - Filter results by product name and click a specific product
 - Read and print the product price
-
-### google-search.spec.ts
-- Verify the Google homepage loads
-- Run a search from the homepage
-- Open a results page directly
 
 ## Notes
 
