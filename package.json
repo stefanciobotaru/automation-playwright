@@ -1,0 +1,20 @@
+{
+  "name": "automation-playwright",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Playwright web testing framework with Google Search examples.",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^25.7.0",
+    "typescript": "^5.8.3"
+  }
+}
