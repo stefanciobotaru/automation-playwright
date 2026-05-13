@@ -12,6 +12,8 @@ jobs:
   test:
     timeout-minutes: 30
     runs-on: [self-hosted]
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
     container:
       image: mcr.microsoft.com/playwright:v1.54.2-noble
 
@@ -25,10 +27,13 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Prepare Playwright cache directory
+        run: mkdir -p "$PLAYWRIGHT_BROWSERS_PATH"
+
       - name: Cache Playwright browsers
         uses: actions/cache@v5
         with:
-          path: ~/.cache/ms-playwright
+          path: ${{ env.PLAYWRIGHT_BROWSERS_PATH }}
           key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
