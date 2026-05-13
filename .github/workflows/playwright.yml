@@ -11,6 +11,8 @@ jobs:
   test:
     timeout-minutes: 30
     runs-on: [self-hosted]
+    container:
+      image: mcr.microsoft.com/playwright:v1.54.2-noble
 
     steps:
       - name: Checkout repository
@@ -24,28 +26,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Ensure Playwright system dependencies
-        shell: bash
-        run: |
-          if sudo -n true 2>/dev/null; then
-            sudo npx playwright install-deps chromium
-            exit 0
-          fi
-
-          missing_libs=0
-          for lib in libatk-1.0.so.0 libnss3.so libx11.so.6; do
-            if ! ldconfig -p | grep -q "$lib"; then
-              missing_libs=1
-              echo "Missing library: $lib"
-            fi
-          done
-
-          if [[ "$missing_libs" -eq 1 ]]; then
-            echo "::error::Playwright OS dependencies are missing on this self-hosted runner."
-            echo "::error::Run once as a privileged user on the runner host: npx playwright install-deps chromium"
-            exit 1
-          fi
 
       - name: Install Playwright browsers
         run: npx playwright install chromium
